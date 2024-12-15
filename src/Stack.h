@@ -32,7 +32,8 @@ void StackDelTop(Stack *S);
 // Создание пустого стека
 Stack StackInit(void);
 
-// Неисключающее чтение вершины стека S
+/* Неисключающее чтение вершины стека S.
+!СТЕК ДОЛЖЕН НЕ БЫТЬ ПУСТЫМ!*/
 int StackReadTop(Stack const *const);
 
 #endif

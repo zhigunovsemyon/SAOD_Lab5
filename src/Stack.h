@@ -15,24 +15,24 @@ typedef struct {
 
 /*Вталкивание элемента num в стек S.
 Возврат 0 при успехе, либо ERR_MALLOC*/
-int PushInStack(Stack *S, int num);
+int StackPush(Stack *S, int num);
 
 // Тихое уничтожение стека S
-void SilentFreeStack(Stack *const);
+void StackFree(Stack *const);
 
-// Возврат 0, если стек пустой
-int IsStackEmpty(Stack const *const);
+// Возврат 1, если стек пустой
+int StackIsNotEmpty(Stack const *const);
 
 // Извлечение вершины стека S в num
-int PullFromStack(Stack *const);
+int StackPull(Stack *const);
 
 // Удаление вершины стека
-void DelTopFromStack(Stack *S);
+void StackDelTop(Stack *S);
 
 // Создание пустого стека
-Stack InitStack(void);
+Stack StackInit(void);
 
 // Неисключающее чтение вершины стека S
-int ReadTopFromStack(Stack const *const);
+int StackReadTop(Stack const *const);
 
 #endif

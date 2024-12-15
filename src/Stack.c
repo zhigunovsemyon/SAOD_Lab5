@@ -9,18 +9,18 @@ struct int_Stack {
 	struct int_Stack *next;
 };
 
-int IsStackEmpty(Stack const *const S) {
+int StackIsNotEmpty(Stack const *const S) {
 	/* Если указатель на верхний элемент не NULL,
 	будет возврщён 1, в противном случае -- 0 */
 	return (S->top) ? 1 : 0;
 }
 
-Stack InitStack(void) {
+Stack StackInit(void) {
 	Stack ret = {NULL};
 	return ret;
 }
 
-int PushInStack(Stack *const S, int num) { 
+int StackPush(Stack *const S, int num) { 
 	// Создание нового блока, проверка
 	struct int_Stack *newEl;
 	newEl = (struct int_Stack *)malloc(sizeof(struct int_Stack));
@@ -35,11 +35,11 @@ int PushInStack(Stack *const S, int num) {
 	return ERR_NO;
 }
 
-int ReadTopFromStack(Stack const *const S) { 
+int StackReadTop(Stack const *const S) { 
 	return S->top->num;
 }
 
-void DelTopFromStack(Stack *const S) { 
+void StackDelTop(Stack *const S) { 
 	// Сохранение прошлого верхнего элемента
 	struct int_Stack *prevTop = S->top;
 	// Перезапись нового верхнего элемента
@@ -48,16 +48,16 @@ void DelTopFromStack(Stack *const S) {
 	free(prevTop);
 }
 
-int PullFromStack(Stack *const S) { // Возврат числа из вершины стека
-	int num = ReadTopFromStack(S);
+int StackPull(Stack *const S) { // Возврат числа из вершины стека
+	int num = StackReadTop(S);
 	// Удаление верхнего элемента
-	DelTopFromStack(S);
+	StackDelTop(S);
 	return num;
 }
 
-void SilentFreeStack(Stack *const S) { 
+void StackFree(Stack *const S) { 
 	/* Очистка, пока не будет удалён последний элемент 
 	и top будет указывать в NULL */
 	while (S->top)
-		DelTopFromStack(S);
+		StackDelTop(S);
 }

@@ -6,10 +6,7 @@ enum Errors {
 	ERR_MALLOC // Ошибка malloc
 };
 
-struct int_Stack {
-	int num;
-	struct int_Stack *next;
-};
+struct int_Stack; // Определён в с файле
 
 // Стек чисел
 typedef struct {
@@ -21,13 +18,13 @@ typedef struct {
 int PushInStack(Stack *S, int num);
 
 // Тихое уничтожение стека S
-void SilentFreeStack(Stack *S);
+void SilentFreeStack(Stack *const);
 
 // Возврат 0, если стек пустой
-int IsStackEmpty(Stack *S);
+int IsStackEmpty(Stack const *const);
 
 // Извлечение вершины стека S в num
-int PullFromStack(Stack *S);
+int PullFromStack(Stack *const);
 
 // Удаление вершины стека
 void DelTopFromStack(Stack *S);
@@ -36,6 +33,6 @@ void DelTopFromStack(Stack *S);
 Stack InitStack(void);
 
 // Неисключающее чтение вершины стека S
-int ReadTopFromStack(Stack *S);
+int ReadTopFromStack(Stack const *const);
 
 #endif

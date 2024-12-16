@@ -11,8 +11,7 @@
 typedef enum {
 	CORRECT,
 	BAD_PAIR,
-	CROSS_LOOP,
-	ALLOC_ERR
+	CROSS_LOOP
 } CheckResult;
 
 typedef struct {
@@ -22,12 +21,27 @@ typedef struct {
 static CheckResult CheckPairs(Pair const pairs[], int const count)
 {
 	for (int i = 0; i < count; ++i) {
-	
+		Pair const *const p = pairs + i; //Первая сравниваемая пара
+		
+		/*Проверка на правильную очередность*/
+		if (p->m >= p->n)
+			return BAD_PAIR;
+
+		for (int j = i + 1; j < count; ++j) {
+			/*Пара, с которой будет сравнение*/
+			Pair const *const n = pairs + j;
+
+			/*Если конец первой пары находится до конца второй,
+			но до начала первой, циклы пересекаются*/
+			if (p->n < n->n && p->n > n->m )
+				return CROSS_LOOP;
+		}
 	}
+	return CORRECT;
 }
 
 int main() {
-	Pair const pairs[] = {{1, 5}, {2, 3}, {6, 9}};
+	Pair const pairs[] = {{1, 5}, {2, 3}, {4, 9}};
 	int const count = (int)(sizeof(pairs) / sizeof(*pairs));
 
 	switch (CheckPairs(pairs, count)) {
@@ -40,10 +54,7 @@ int main() {
 	case CROSS_LOOP:
 		puts("Циклы пересекаются\n");
 		break;
-	case ALLOC_ERR:
-		perror("");
-		break;
 	}
-	printf("Hello World!\n");
+
 	return EXIT_SUCCESS;
 }

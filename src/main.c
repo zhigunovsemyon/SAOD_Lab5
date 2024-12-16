@@ -8,15 +8,18 @@
 #include <stdio.h>  /*printf()*/
 #include <stdlib.h> /*EXIT_SUCCESS*/
 
+//Результат сравнения
 typedef enum {
 	CORRECT,
 	BAD_PAIR,
 	CROSS_LOOP
 } CheckResult;
 
+// Пара
 typedef struct {
-	int m, n;
-} Pair;
+	int m /* Начало */, 
+		n /* Конец  */;
+} Pair; 
 
 static CheckResult CheckPairs(Pair const pairs[], int const count)
 {
